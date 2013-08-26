@@ -37,26 +37,26 @@ bowerRelease: {
     }
   },
   stable: {
-		options: {
-	  	endpoint: 'git://github.com/someone/some-package-bower-stable.git',
-    	packageName: 'some-package-stable.js',
-			stageDir: 'staging-stable'
-		},
- 		files: {
-			cwd: 'build/stable',
-			src: ['library.js', 'library.min.js', 'css/**/*.css'],
-		}
+    options: {
+      endpoint: 'git://github.com/someone/some-package-bower-stable.git',
+      packageName: 'some-package-stable.js',
+      stageDir: 'staging-stable'
+    },
+     files: {
+      cwd: 'build/stable',
+      src: ['library.js', 'library.min.js', 'css/**/*.css'],
+    }
   },
   devel: {
-		options: {
-	  	endpoint: 'git://github.com/someone/some-package-bower-devel.git',
- 		  packageName: 'some-package-devel.js',
-			stageDir: 'staging-devel'
-		},
- 		files: {
-			cwd: 'build/devel',
-			src: ['library.js', 'library.min.js', 'css/**/*.css'],
-		}
+    options: {
+      endpoint: 'git://github.com/someone/some-package-bower-devel.git',
+       packageName: 'some-package-devel.js',
+      stageDir: 'staging-devel'
+    },
+     files: {
+      cwd: 'build/devel',
+      src: ['library.js', 'library.min.js', 'css/**/*.css'],
+    }
   }
 }
 ```
