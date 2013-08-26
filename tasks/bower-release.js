@@ -108,12 +108,8 @@ module.exports = function(grunt) {
     /* TODO: Support overriding dependencies by either extending, or
      * replacing the existing ones... For now just extend
      */
-    if(typeof options.dependencies === 'object') {
-      if(bowerJSON.dependencies)
-        bowerJSON.dependencies = grunt.util._.extend(bowerJSON.dependencies, options.dependencies)
-      else
-        bowerJSON.dependencies = options.dependencies
-    }
+    if(typeof options.dependencies === 'object')
+      bowerJSON.dependencies = grunt.util._.extend(bowerJSON.dependencies || {}, options.dependencies)
 
     /* TODO: Support devDependency overriding? Is that really needed? */
 
