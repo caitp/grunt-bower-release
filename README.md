@@ -42,7 +42,7 @@ bowerRelease: {
       packageName: 'some-package-stable.js',
       stageDir: 'staging-stable'
     },
-     files: {
+    files: {
       cwd: 'build/stable',
       src: ['library.js', 'library.min.js', 'css/**/*.css'],
     }
@@ -53,7 +53,7 @@ bowerRelease: {
        packageName: 'some-package-devel.js',
       stageDir: 'staging-devel'
     },
-     files: {
+    files: {
       cwd: 'build/devel',
       src: ['library.js', 'library.min.js', 'css/**/*.css'],
     }
