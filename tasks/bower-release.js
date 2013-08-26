@@ -45,16 +45,14 @@ module.exports = function(grunt) {
 
   grunt.registerMultiTask('bowerRelease',
     'Push bower component files to git endpoint and publish', function() {
-    /* Merge in global options and global files */
-    var _options = grunt.config.get('bowerRelease.options') || {},
-        fs = require('fs.extra'),
+    var fs = require('fs.extra'),
         path = require('path'),
         os = require('os'),
         startDir = process.cwd(), endpoint,
         finish = this.async(),
-        options = grunt.util._.extend(_options, this.options({
+        options = this.options({
           'stageDir': 'staging',
-        })),
+        }),
         self = this,
         bowerJSON,
         bowerFile
@@ -94,9 +92,8 @@ module.exports = function(grunt) {
       options.endpoint = bowerJSON.endpoint
 
     /* Fail if we don't have an endpoint */
-    if(typeof options.endpoint === 'undefined') {
+    if(typeof options.endpoint === 'undefined')
       return finish(new Error('Missing required \'endpoint\' parameter'))
-    }
 
     bowerJSON.endpoint = options.endpoint
 
