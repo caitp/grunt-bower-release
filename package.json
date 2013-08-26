@@ -1,0 +1,36 @@
+{
+  "name": "grunt-bower-release",
+  "version": "0.0.0",
+  "description": "Automatically push tagged Bower package releases to endpoint",
+  "main": "grunt.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/caitp/grunt-bower-release.git"
+  },
+  "keywords": [
+    "bower",
+    "grunt",
+    "gruntplugin",
+    "release",
+    "package",
+    "distribute"
+  ],
+  "author": "Caitlin Potter",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/caitp/grunt-bower-release/issues"
+  },
+  "dependencies": {
+    "fs.extra": "~1.2.1"
+  },
+  "peerDependencies": {
+    "grunt": "*"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.3"
+  }
+}
