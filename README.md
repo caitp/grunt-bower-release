@@ -50,7 +50,7 @@ bowerRelease: {
   devel: {
     options: {
       endpoint: 'git://github.com/someone/some-package-bower-devel.git',
-       packageName: 'some-package-devel.js',
+      packageName: 'some-package-devel.js',
       stageDir: 'staging-devel'
     },
     files: {
