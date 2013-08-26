@@ -30,12 +30,12 @@ As such, a `Gruntfile` may contain the following:
 
 ```js
 bowerRelease: {
-	options: {
-		main: 'library.min.js'
-		dependencies: {
-			'jquery': '~2.0.3'
-		}
-	},
+  options: {
+    main: 'library.min.js'
+    dependencies: {
+      'jquery': '~2.0.3'
+    }
+  },
   stable: {
 		options: {
 	  	endpoint: 'git://github.com/someone/some-package-bower-stable.git',
