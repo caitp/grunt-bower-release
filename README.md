@@ -77,7 +77,7 @@ It's super simple stuff, and I hope some people might find it useful!
 
 Files must currently be specified per-task, which is unfortunate and will hopefully be fixed soon.
 
-They may be specified as per the guidelines in [Configuring files](https://github.com/gruntjs/grunt/wiki/Configuring-tasks#files)
+They may be specified as per the guidelines in [Configuring files](http://gruntjs.com/configuring-tasks#files)
 
 ##License
 
