@@ -81,7 +81,12 @@ module.exports = function(grunt) {
           args: args,
           opts: { stdio: streams }
         }, done)
-      }, done)
+      }, function(err, result, code) {
+        // Hopefully enough time...
+        setTimeout(function() {
+          done(err, result, code);
+        }, 500);
+      });
     },
 
     /* Commit the current changes to a changeset, with the specified message. */
