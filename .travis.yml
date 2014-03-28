@@ -1,9 +1,16 @@
 language: node_js
+
 node_js:
-  - 0.10
+  - 0.1
+
+env:
+  global:
+    secure: ZmvEp0/1kuKwOFtd2ts3z6pR5LKBg9f6DRyPSRbXqzi7vJ9JHGob3bFKU+LOyqczi0op32i0mjc0PelEu9SAW/H0AIfnvKzeMxj3AkJ5+aPwXT+OuBAcHbeYcSx9UDBiaf91QMHvxWx4oDpgSbBMER6r9UKNc9wLHS9RkPQ9/r4=
 
 before_script:
-  - npm install -g grunt-cli
+  - npm install -g grunt-cli istanbul
+  - npm install coveralls
 
 script:
-  - grunt test
+  - scripts/coverage.sh
+  - scripts/coveralls.sh
