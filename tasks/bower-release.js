@@ -159,70 +159,73 @@ module.exports = function(grunt) {
          * Now, copy in each of the files that we care about.
          */
         process.chdir(startDir)
-        var isExpandedPair,
-          files = [];
+        var files = [];
         /* bower.json / component.json needs to be copied specially, because
          * some fields in it may be overridden
          */
         files.push(bowerFile)
         grunt.file.write(options.stageDir + '/' + bowerFile,
           JSON.stringify(bowerJSON, null, 2))
+        copyBuildFilesToStage()
+      }
+
+      function copyBuildFilesToStage(){
         grunt.util.async.map(self.files, function(item, next) {
-          isExpandedPair = item.orig.expand || false
-          grunt.util.async.map(item.src, copyToDest, function(err, results) {
+          grunt.util.async.map(item.src, copyItemSrcsToDest(item), function(err, results) {
             next(err, results)
           })
 
-          function copyToDest (src, next) {
-            var dest
-            if(typeof item.orig.dest === 'undefined')
-              setStageDirDest()
-            else if(detectDestType(item.orig.dest) === 'directory')
-              setUserDefinedDestDir()
-            else
-              setUserDefinedDestFile()
-
-            if(grunt.file.isDir(src)) {
-              grunt.verbose.writeln('Creating ' + dest.cyan)
-              grunt.file.mkdir(dest)
-              next()
-            } else {
-              grunt.verbose.writeln('Copying ' + src.cyan + ' -> ' + dest.cyan)
-              grunt.file.copy(src, dest)
-              next(null, dest)
-            }
-
-            function setStageDirDest (){
-              dest = getExpandedStageDest()
-            }
-
-            function getExpandedStageDest () {
-              var stageFile = grunt.file.expandMapping([item.dest], options.stageDir, {
-                cwd: item.orig.cwd || startDir
-              })
-              return stageFile[0].dest
-            }
-
-            function setUserDefinedDestFile(){
-              dest = item.dest
-            }
-
-            function setUserDefinedDestDir(){
-              dest = (isExpandedPair) ? item.dest : unixifyPath(path.join(item.dest, src))
-            }
-
-            function detectDestType(dest) {
-              if(grunt.util._.endsWith(dest, '/'))
-                return 'directory'
-              return 'file'
-            }
-            function unixifyPath(filepath) {
-              if(process.platform === 'win32')
-                return filepath.replace(/\\/g, '/')
-              return filepath
-            }
-          }
         }, copiedFiles)
+      }
+
+      function copyItemSrcsToDest(item) {
+        return function copySrcToDest (src, next) {
+          var dest
+          if(typeof item.orig.dest === 'undefined')
+            dest = getExpandedStageDest(item)
+          else if(detectDestType(item.orig.dest) === 'directory')
+            dest = getUserDefinedDestDir(item)
+          else
+            dest = getUserDefinedDestFile(item)
+
+          if(grunt.file.isDir(src)) {
+            grunt.verbose.writeln('Creating ' + dest.cyan)
+            grunt.file.mkdir(dest)
+            next()
+          } else {
+            grunt.verbose.writeln('Copying ' + src.cyan + ' -> ' + dest.cyan)
+            grunt.file.copy(src, dest)
+            next(null, dest)
+          }
+
+        }
+      }
+
+      function getExpandedStageDest (item) {
+        var stageFile = grunt.file.expandMapping([item.dest], options.stageDir, {
+          cwd: item.orig.cwd || startDir
+        })
+        return stageFile[0].dest
+      }
+
+      function getUserDefinedDestFile(item){
+        return item.dest
+      }
+
+      function getUserDefinedDestDir(item, src){
+        var isExpandedPair = item.orig.expand || false
+        return (isExpandedPair) ? item.dest : unixifyPath(path.join(item.dest, src))
+      }
+
+      function detectDestType(dest) {
+        if(grunt.util._.endsWith(dest, '/'))
+          return 'directory'
+        return 'file'
+      }
+      function unixifyPath(filepath) {
+        if(process.platform === 'win32')
+          return filepath.replace(/\\/g, '/')
+        return filepath
       }
 
       function copiedFiles(err, results) {
