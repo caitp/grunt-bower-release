@@ -31,7 +31,7 @@ module.exports = function(grunt) {
   }
   return {
     /* Ensure that the VCS is installed on the system, and therefore usable. */
-    startup: function(done) {
+    setUp: function(parentArg, done) {
       grunt.util.spawn({
         cmd: 'git',
         args: ['version'],
@@ -40,6 +40,10 @@ module.exports = function(grunt) {
           stdio: 'ignore'
         }
       }, done)
+    },
+
+    tearDown: function(done) {
+      done();
     },
 
     /* Clone the repository at 'endpoint' into the current directory */

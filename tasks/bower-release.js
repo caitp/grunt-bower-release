@@ -29,7 +29,8 @@ module.exports = function(grunt) {
    * Other VCS tools can be added here as needed in the future.
    * The following functions are required:
    *
-   * startup(done)                     -- Ensure that the VCS is installed on the system, and therefore usable.
+   * setUp(this, done)                     -- Ensure that the VCS is installed on the system, and therefore usable.
+   * tearDown(done)                     -- Do any cleanup necessary.
    * clone(endpoint, branchName, done)     -- Clone the repository at 'endpoint' into the current directory.
    * add(files, done)                  -- Add the array of files into the repository, relative to CWD
    * commit(message, done)             -- Commit the current changes to a changeset, with the specified message.
@@ -40,7 +41,8 @@ module.exports = function(grunt) {
    * falsy ones) are ignored.
    */
   var endpoints = {
-    git: require('./endpoints/git')(grunt)
+    git: require('./endpoints/git')(grunt),
+    test: require('./endpoints/test-ep')(grunt)
   }
 
   grunt.registerMultiTask('bowerRelease',
@@ -52,6 +54,7 @@ module.exports = function(grunt) {
         finish = this.async(),
         options = this.options({
           'stageDir': 'staging',
+          'endpointType': 'git'
         }),
         self = this,
         bowerJSON,
@@ -116,10 +119,10 @@ module.exports = function(grunt) {
     /* For now, 'git' is the only supported endpoint type, and we aren't doing anything
      * complicated to figure out the correct VCS or protocol. So just assume 'git'
      */
-    endpoint = endpoints.git
+    endpoint = endpoints[options.endpointType]
 
     /* Make sure that the endpoint is actually usable (eg, git or mercurial or whatever is installed) */
-    endpoint.startup(ready)
+    endpoint.setUp(this, ready)
 
     function ready(err) {
       if(err) return finish(err)
@@ -145,7 +148,7 @@ module.exports = function(grunt) {
 
       if(typeof stat !== 'undefined')
         fs.rmrfSync(options.stageDir)
-      fs.mkdirSync(options.stageDir)
+      fs.mkdirRecursiveSync(options.stageDir)
       process.chdir(options.stageDir)
       /* Once we're in the stageDir, we can check out the existing code.
        * It doesn't matter if checkout fails, however.
@@ -156,8 +159,8 @@ module.exports = function(grunt) {
          * Now, copy in each of the files that we care about.
          */
         process.chdir(startDir)
-        var isExpandedPair
-        var files = []
+        var isExpandedPair,
+          files = [];
         /* bower.json / component.json needs to be copied specially, because
          * some fields in it may be overridden
          */
@@ -166,16 +169,19 @@ module.exports = function(grunt) {
           JSON.stringify(bowerJSON, null, 2))
         grunt.util.async.map(self.files, function(item, next) {
           isExpandedPair = item.orig.expand || false
-          grunt.util.async.map(item.src, function(src, next) {
+          grunt.util.async.map(item.src, copyToDest, function(err, results) {
+            next(err, results)
+          })
+
+          function copyToDest (src, next) {
             var dest
-            if(detectDestType(item.dest) === 'directory')
-              dest = (isExpandedPair) ? item.dest : unixifyPath(path.join(item.dest, src))
-            else if(typeof item.dest === 'undefined')
-              dest = grunt.file.expandMapping([item.src], options.stageDir, {
-                cwd: item.cwd || startDir
-              })[0].dest
+            if(typeof item.orig.dest === 'undefined')
+              setStageDirDest()
+            else if(detectDestType(item.orig.dest) === 'directory')
+              setUserDefinedDestDir()
             else
-              dest = item.dest
+              setUserDefinedDestFile()
+
             if(grunt.file.isDir(src)) {
               grunt.verbose.writeln('Creating ' + dest.cyan)
               grunt.file.mkdir(dest)
@@ -185,20 +191,38 @@ module.exports = function(grunt) {
               grunt.file.copy(src, dest)
               next(null, dest)
             }
-          }, function(err, results) {
-            next(err, results)
-          })
+
+            function setStageDirDest (){
+              dest = getExpandedStageDest()
+            }
+
+            function getExpandedStageDest () {
+              var stageFile = grunt.file.expandMapping([item.dest], options.stageDir, {
+                cwd: item.orig.cwd || startDir
+              })
+              return stageFile[0].dest
+            }
+
+            function setUserDefinedDestFile(){
+              dest = item.dest
+            }
+
+            function setUserDefinedDestDir(){
+              dest = (isExpandedPair) ? item.dest : unixifyPath(path.join(item.dest, src))
+            }
+
+            function detectDestType(dest) {
+              if(grunt.util._.endsWith(dest, '/'))
+                return 'directory'
+              return 'file'
+            }
+            function unixifyPath(filepath) {
+              if(process.platform === 'win32')
+                return filepath.replace(/\\/g, '/')
+              return filepath
+            }
+          }
         }, copiedFiles)
-        function detectDestType(dest) {
-          if(grunt.util._.endsWith(dest, '/'))
-            return 'directory'
-          return 'file'
-        }
-        function unixifyPath(filepath) {
-          if(process.platform === 'win32')
-            return filepath.replace(/\\/g, '/')
-          return filepath
-        }
       }
 
       function copiedFiles(err, results) {
@@ -251,7 +275,11 @@ module.exports = function(grunt) {
          */
         if(!grunt.option('debug'))
           fs.rmrfSync(options.stageDir)
-        finish()        
+        endpoint.tearDown(function(err){
+          if(err)
+            finish(err);
+          finish();
+        });
       }
 
       function makeTagMsg(name) {

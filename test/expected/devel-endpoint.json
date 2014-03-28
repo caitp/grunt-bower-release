@@ -1,0 +1,251 @@
+{
+  "called": {
+    "setUp": {
+      "times": 2,
+      "with": {
+        "0": {
+          "nameArgs": "bowerRelease:devel",
+          "name": "bowerRelease",
+          "args": [],
+          "flags": {},
+          "errorCount": 0,
+          "target": "devel",
+          "data": {
+            "options": {
+              "endpoint": "git://github.com/someone/some-package-bower-devel.git",
+              "packageName": "library.js",
+              "stageDir": "../tmp/staging-devel"
+            },
+            "files": [
+              {
+                "expand": true,
+                "cwd": "build/",
+                "src": [
+                  "*.*",
+                  "css/**/*.*"
+                ]
+              }
+            ]
+          },
+          "files": [
+            {
+              "src": [
+                "build/jquery.js"
+              ],
+              "orig": {
+                "expand": true,
+                "cwd": "build/",
+                "src": [
+                  "*.*",
+                  "css/**/*.*"
+                ]
+              },
+              "dest": "jquery.js"
+            },
+            {
+              "src": [
+                "build/jquery.min.js"
+              ],
+              "orig": {
+                "expand": true,
+                "cwd": "build/",
+                "src": [
+                  "*.*",
+                  "css/**/*.*"
+                ]
+              },
+              "dest": "jquery.min.js"
+            },
+            {
+              "src": [
+                "build/library.js"
+              ],
+              "orig": {
+                "expand": true,
+                "cwd": "build/",
+                "src": [
+                  "*.*",
+                  "css/**/*.*"
+                ]
+              },
+              "dest": "library.js"
+            },
+            {
+              "src": [
+                "build/library.min.js"
+              ],
+              "orig": {
+                "expand": true,
+                "cwd": "build/",
+                "src": [
+                  "*.*",
+                  "css/**/*.*"
+                ]
+              },
+              "dest": "library.min.js"
+            },
+            {
+              "src": [
+                "build/css/a/a-1.css"
+              ],
+              "orig": {
+                "expand": true,
+                "cwd": "build/",
+                "src": [
+                  "*.*",
+                  "css/**/*.*"
+                ]
+              },
+              "dest": "css/a/a-1.css"
+            },
+            {
+              "src": [
+                "build/css/a/a-1.less"
+              ],
+              "orig": {
+                "expand": true,
+                "cwd": "build/",
+                "src": [
+                  "*.*",
+                  "css/**/*.*"
+                ]
+              },
+              "dest": "css/a/a-1.less"
+            },
+            {
+              "src": [
+                "build/css/a/a-2.css"
+              ],
+              "orig": {
+                "expand": true,
+                "cwd": "build/",
+                "src": [
+                  "*.*",
+                  "css/**/*.*"
+                ]
+              },
+              "dest": "css/a/a-2.css"
+            },
+            {
+              "src": [
+                "build/css/a/a-2.less"
+              ],
+              "orig": {
+                "expand": true,
+                "cwd": "build/",
+                "src": [
+                  "*.*",
+                  "css/**/*.*"
+                ]
+              },
+              "dest": "css/a/a-2.less"
+            },
+            {
+              "src": [
+                "build/css/b/b.css"
+              ],
+              "orig": {
+                "expand": true,
+                "cwd": "build/",
+                "src": [
+                  "*.*",
+                  "css/**/*.*"
+                ]
+              },
+              "dest": "css/b/b.css"
+            },
+            {
+              "src": [
+                "build/css/b/b.less"
+              ],
+              "orig": {
+                "expand": true,
+                "cwd": "build/",
+                "src": [
+                  "*.*",
+                  "css/**/*.*"
+                ]
+              },
+              "dest": "css/b/b.less"
+            },
+            {
+              "src": [
+                "build/css/c.css"
+              ],
+              "orig": {
+                "expand": true,
+                "cwd": "build/",
+                "src": [
+                  "*.*",
+                  "css/**/*.*"
+                ]
+              },
+              "dest": "css/c.css"
+            }
+          ],
+          "filesSrc": [
+            "build/jquery.js",
+            "build/jquery.min.js",
+            "build/library.js",
+            "build/library.min.js",
+            "build/css/a/a-1.css",
+            "build/css/a/a-1.less",
+            "build/css/a/a-2.css",
+            "build/css/a/a-2.less",
+            "build/css/b/b.css",
+            "build/css/b/b.less",
+            "build/css/c.css"
+          ]
+        }
+      }
+    },
+    "clone": {
+      "times": 2,
+      "with": {
+        "0": "git://github.com/someone/some-package-bower-devel.git",
+        "2": "."
+      }
+    },
+    "add": {
+      "times": 2,
+      "with": {
+        "0": [
+          "%%PROJECT_ROOT%%/test/tmp/staging-devel/jquery.js",
+          "%%PROJECT_ROOT%%/test/tmp/staging-devel/jquery.min.js",
+          "%%PROJECT_ROOT%%/test/tmp/staging-devel/library.js",
+          "%%PROJECT_ROOT%%/test/tmp/staging-devel/library.min.js",
+          "%%PROJECT_ROOT%%/test/tmp/staging-devel/css/a/a-1.css",
+          "%%PROJECT_ROOT%%/test/tmp/staging-devel/css/a/a-1.less",
+          "%%PROJECT_ROOT%%/test/tmp/staging-devel/css/a/a-2.css",
+          "%%PROJECT_ROOT%%/test/tmp/staging-devel/css/a/a-2.less",
+          "%%PROJECT_ROOT%%/test/tmp/staging-devel/css/b/b.css",
+          "%%PROJECT_ROOT%%/test/tmp/staging-devel/css/b/b.less",
+          "%%PROJECT_ROOT%%/test/tmp/staging-devel/css/c.css"
+        ]
+      }
+    },
+    "commit": {
+      "times": 2,
+      "with": {
+        "0": "Bumped version to 1.0.0"
+      }
+    },
+    "tag": {
+      "times": 2,
+      "with": {
+        "0": "1.0.0",
+        "1": "library.js@1.0.0"
+      }
+    },
+    "push": {
+      "times": 2,
+      "with": {
+        "1": "1.0.0"
+      }
+    },
+    "tearDown": {
+      "times": 2,
+      "with": {}
+    }
+  }
+}

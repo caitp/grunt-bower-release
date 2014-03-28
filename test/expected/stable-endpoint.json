@@ -1,0 +1,177 @@
+{
+  "called": {
+    "setUp": {
+      "times": 1,
+      "with": {
+        "0": {
+          "nameArgs": "bowerRelease:stable",
+          "name": "bowerRelease",
+          "args": [],
+          "flags": {},
+          "errorCount": 0,
+          "target": "stable",
+          "data": {
+            "options": {
+              "endpoint": "git://github.com/someone/some-package-bower-stable.git",
+              "stageDir": "../tmp/staging-stable"
+            },
+            "files": [
+              {
+                "expand": true,
+                "cwd": "build/",
+                "src": [
+                  "library.js",
+                  "library.min.js",
+                  "css/**/*.css"
+                ]
+              }
+            ]
+          },
+          "files": [
+            {
+              "src": [
+                "build/library.js"
+              ],
+              "orig": {
+                "expand": true,
+                "cwd": "build/",
+                "src": [
+                  "library.js",
+                  "library.min.js",
+                  "css/**/*.css"
+                ]
+              },
+              "dest": "library.js"
+            },
+            {
+              "src": [
+                "build/library.min.js"
+              ],
+              "orig": {
+                "expand": true,
+                "cwd": "build/",
+                "src": [
+                  "library.js",
+                  "library.min.js",
+                  "css/**/*.css"
+                ]
+              },
+              "dest": "library.min.js"
+            },
+            {
+              "src": [
+                "build/css/a/a-1.css"
+              ],
+              "orig": {
+                "expand": true,
+                "cwd": "build/",
+                "src": [
+                  "library.js",
+                  "library.min.js",
+                  "css/**/*.css"
+                ]
+              },
+              "dest": "css/a/a-1.css"
+            },
+            {
+              "src": [
+                "build/css/a/a-2.css"
+              ],
+              "orig": {
+                "expand": true,
+                "cwd": "build/",
+                "src": [
+                  "library.js",
+                  "library.min.js",
+                  "css/**/*.css"
+                ]
+              },
+              "dest": "css/a/a-2.css"
+            },
+            {
+              "src": [
+                "build/css/b/b.css"
+              ],
+              "orig": {
+                "expand": true,
+                "cwd": "build/",
+                "src": [
+                  "library.js",
+                  "library.min.js",
+                  "css/**/*.css"
+                ]
+              },
+              "dest": "css/b/b.css"
+            },
+            {
+              "src": [
+                "build/css/c.css"
+              ],
+              "orig": {
+                "expand": true,
+                "cwd": "build/",
+                "src": [
+                  "library.js",
+                  "library.min.js",
+                  "css/**/*.css"
+                ]
+              },
+              "dest": "css/c.css"
+            }
+          ],
+          "filesSrc": [
+            "build/library.js",
+            "build/library.min.js",
+            "build/css/a/a-1.css",
+            "build/css/a/a-2.css",
+            "build/css/b/b.css",
+            "build/css/c.css"
+          ]
+        }
+      }
+    },
+    "clone": {
+      "times": 1,
+      "with": {
+        "0": "git://github.com/someone/some-package-bower-stable.git",
+        "2": "."
+      }
+    },
+    "add": {
+      "times": 1,
+      "with": {
+        "0": [
+          "%%PROJECT_ROOT%%/test/tmp/staging-stable/library.js",
+          "%%PROJECT_ROOT%%/test/tmp/staging-stable/library.min.js",
+          "%%PROJECT_ROOT%%/test/tmp/staging-stable/css/a/a-1.css",
+          "%%PROJECT_ROOT%%/test/tmp/staging-stable/css/a/a-2.css",
+          "%%PROJECT_ROOT%%/test/tmp/staging-stable/css/b/b.css",
+          "%%PROJECT_ROOT%%/test/tmp/staging-stable/css/c.css"
+        ]
+      }
+    },
+    "commit": {
+      "times": 1,
+      "with": {
+        "0": "Bumped version to 1.0.0"
+      }
+    },
+    "tag": {
+      "times": 1,
+      "with": {
+        "0": "1.0.0",
+        "1": "undefined@1.0.0"
+      }
+    },
+    "push": {
+      "times": 1,
+      "with": {
+        "1": "1.0.0"
+      }
+    },
+    "tearDown": {
+      "times": 1,
+      "with": {}
+    }
+  }
+}
