@@ -1,4 +1,4 @@
-#grunt-bower-release [![Build Status](https://travis-ci.org/caitp/grunt-bower-release.svg?branch=master)](https://travis-ci.org/caitp/grunt-bower-release)
+#grunt-bower-release [![Build Status](https://travis-ci.org/caitp/grunt-bower-release.svg?branch=master)](https://travis-ci.org/caitp/grunt-bower-release) [![Coverage Status](https://coveralls.io/repos/caitp/grunt-bower-release/badge.png)](https://coveralls.io/r/caitp/grunt-bower-release)
 ####Push tagged Bower package releases to endpoint
 
 ##Installation
