@@ -31,7 +31,7 @@ As such, a `Gruntfile` may contain the following:
 ```js
 bowerRelease: {
   options: {
-    main: 'library.min.js'
+    main: 'library.min.js',
     dependencies: {
       'jquery': '~2.0.3'
     }
@@ -40,23 +40,29 @@ bowerRelease: {
     options: {
       endpoint: 'git://github.com/someone/some-package-bower-stable.git',
       packageName: 'some-package-stable.js',
-      stageDir: 'staging-stable'
+      stageDir: 'staging-stable/'
     },
-    files: {
-      cwd: 'build/stable',
-      src: ['library.js', 'library.min.js', 'css/**/*.css'],
-    }
+    files: [
+      {
+        expand: true,
+        cwd: 'build/stable/',
+        src: ['library.js', 'library.min.js', 'css/**/*.css'],
+      }
+    ]
   },
   devel: {
     options: {
       endpoint: 'git://github.com/someone/some-package-bower-devel.git',
       packageName: 'some-package-devel.js',
-      stageDir: 'staging-devel'
+      stageDir: 'staging-devel/'
     },
-    files: {
-      cwd: 'build/devel',
-      src: ['library.js', 'library.min.js', 'css/**/*.css'],
-    }
+    files: [
+      {
+        expand: true,
+        cwd: 'build/devel/',
+        src: ['library.js', 'library.min.js', 'css/**/*.css'],
+      }
+    ]
   }
 }
 ```
