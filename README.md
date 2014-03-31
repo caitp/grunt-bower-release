@@ -1,4 +1,5 @@
-#grunt-bower-release [![Build Status](https://travis-ci.org/caitp/grunt-bower-release.svg?branch=master)](https://travis-ci.org/caitp/grunt-bower-release) [![Dependency Status](https://david-dm.org/caitp/grunt-bower-release.png)](https://david-dm.org/caitp/grunt-bower-release) [![devDependency Status](https://david-dm.org/caitp/grunt-bower-release/dev-status.png)](https://david-dm.org/caitp/grunt-bower-release#info=devDependencies) [![Coverage Status](https://coveralls.io/repos/caitp/grunt-bower-release/badge.png)](https://coveralls.io/r/caitp/grunt-bower-release)
+#grunt-bower-release
+[![Build Status](https://travis-ci.org/caitp/grunt-bower-release.svg?branch=master)](https://travis-ci.org/caitp/grunt-bower-release) [![Dependency Status](https://david-dm.org/caitp/grunt-bower-release.png)](https://david-dm.org/caitp/grunt-bower-release) [![devDependency Status](https://david-dm.org/caitp/grunt-bower-release/dev-status.png)](https://david-dm.org/caitp/grunt-bower-release#info=devDependencies) [![Coverage Status](https://coveralls.io/repos/caitp/grunt-bower-release/badge.png)](https://coveralls.io/r/caitp/grunt-bower-release)
 ####Push tagged Bower package releases to endpoint
 
 ##Installation
