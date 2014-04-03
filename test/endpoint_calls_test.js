@@ -2,6 +2,7 @@
 
 var grunt = require('grunt');
 var path = require('path');
+var fs = require('fs');
 
 /*
   ======== A Handy Little Nodeunit Reference ========
@@ -40,20 +41,20 @@ exports.bowerRelease = {
     done();
   },
   tearDown: function(done) {
-    // setup here if necessary
+    // teardown here if necessary
     done();
   },
   stable: function(test) {
     test.expect(1);
-    var actual = processJSON(grunt.file.read('test/tmp/stable-endpoint.json'));
-    var expected = processJSON(grunt.file.read('test/expected/stable-endpoint.json'));
+    var actual = processJSON(fs.readFileSync('test/tmp/stable-endpoint.json', 'utf8'));
+    var expected = processJSON(fs.readFileSync('test/expected/stable-endpoint.json', 'utf8'));
     test.deepEqual(actual, expected, 'should call all vcs methods with correct arguments');
     test.done();
   },
   devel: function(test) {
     test.expect(1);
-    var actual = processJSON(grunt.file.read('test/tmp/devel-endpoint.json'));
-    var expected = processJSON(grunt.file.read('test/expected/devel-endpoint.json'));
+    var actual = processJSON(fs.readFileSync('test/tmp/devel-endpoint.json', 'utf8'));
+    var expected = processJSON(fs.readFileSync('test/expected/devel-endpoint.json', 'utf8'));
     test.deepEqual(actual, expected, 'should call all vcs methods with correct arguments');
     test.done();
   }
