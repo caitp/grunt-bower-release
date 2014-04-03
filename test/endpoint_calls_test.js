@@ -24,7 +24,7 @@ var fs = require('fs');
     test.ifError(value)
 */
 
-var projectRoot = path.resolve(__dirname, '..');
+var projectRoot = path.resolve(__dirname, '..').replace(/\\/g,'/');
 
 function processFile(contents) {
   return contents
