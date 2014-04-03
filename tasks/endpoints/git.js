@@ -123,7 +123,12 @@ module.exports = function(grunt) {
 
     /* Push the changesets to the server */
     push: function(branch, tag, done) {
-      var args = ['push', 'origin', branch, tag]
+      var args = []
+      args.push('push')
+      args.push('origin')
+      if(typeof branch === 'string')
+        args.push(branch)
+      args.push(tag)
       grunt.verbose.writeln('git ' + args.join(' '))
       grunt.util.spawn({
         cmd: 'git',
