@@ -170,7 +170,7 @@ module.exports = function(grunt) {
         /* bower.json / component.json needs to be copied specially, because
          * some fields in it may be overridden
          */
-        files.push(bowerFile)
+        if (bowerFile) files.push(bowerFile)
         grunt.file.write(options.stageDir + '/' + bowerFile,
           JSON.stringify(bowerJSON, null, 2))
         copyBuildFilesToStage()
@@ -243,6 +243,10 @@ module.exports = function(grunt) {
           else if(typeof item === 'string')
             files.push(item)
         })
+        /* The package bower.json or component.json file needs to be added to the repository, in
+         * order for bower's magic to really work. So it needs to be added here.
+         */
+        files.push(bowerFile)
         /* After copying files in, it is necessary to add them to the repository.
          * The VCS plugin is not responsible for comprehension of the grunt file
          * objects, and so we can do that here.
