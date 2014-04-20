@@ -78,8 +78,9 @@ It's super simple stuff, and I hope some people might find it useful!
 2. `packageName` -- The bower package name. This overrides `name` in `bower.json`
 3. `stageDir` -- A staging directory where the repository is built and tagged.
 4. `main` -- Enables the grunt task to override `bower.json`'s `main` parameter. This will be ignored if it is not a string or an array.
-5. `dependencies` -- Enables the grunt task to add dependencies to a build. The `dependencies` value in `bower.json` will be extended with these.
-6. `branchName` -- (Optional) Specify the branch used for the endpoint.
+5. `dependencies` -- Enables the grunt task to add dependencies to a build.
+6. `extendDependencies` -- If true, the depencies from the source repository will be extended with the grunt options dependencies.
+7. `branchName` -- (Optional) Specify the branch used for the endpoint.
 
 ## Files
 
