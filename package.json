@@ -1,6 +1,6 @@
 {
   "name": "grunt-bower-release",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Automatically push tagged Bower package releases to endpoint",
   "main": "grunt.js",
   "scripts": {
