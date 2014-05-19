@@ -12,5 +12,5 @@ before_script:
   - npm install coveralls
 
 script:
-  - scripts/coverage.sh
-  - scripts/coveralls.sh
+  - scripts/travis.sh
+
