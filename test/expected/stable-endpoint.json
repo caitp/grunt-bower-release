@@ -146,7 +146,8 @@
           "%%PROJECT_ROOT%%/test/tmp/staging-stable/css/a/a-1.css",
           "%%PROJECT_ROOT%%/test/tmp/staging-stable/css/a/a-2.css",
           "%%PROJECT_ROOT%%/test/tmp/staging-stable/css/b/b.css",
-          "%%PROJECT_ROOT%%/test/tmp/staging-stable/css/c.css"
+          "%%PROJECT_ROOT%%/test/tmp/staging-stable/css/c.css",
+          "bower.json"
         ]
       }
     },

@@ -220,7 +220,8 @@
           "%%PROJECT_ROOT%%/test/tmp/staging-devel/css/a/a-2.less",
           "%%PROJECT_ROOT%%/test/tmp/staging-devel/css/b/b.css",
           "%%PROJECT_ROOT%%/test/tmp/staging-devel/css/b/b.less",
-          "%%PROJECT_ROOT%%/test/tmp/staging-devel/css/c.css"
+          "%%PROJECT_ROOT%%/test/tmp/staging-devel/css/c.css",
+          "bower.json"
         ]
       }
     },
