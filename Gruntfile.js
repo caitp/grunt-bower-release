@@ -53,12 +53,54 @@ module.exports = function(grunt) {
             src: ['*.*', 'css/**/*.*']
           }
         ]
+      },
+      overwriteTag: {
+        options: {
+          endpoint: 'git://github.com/someone/some-package-bower-overwritetag.git',
+          stageDir: '../tmp/staging-overwritetag',
+          overwriteTag: true
+        },
+        files: [
+          {
+            expand: true,
+            cwd: 'build/',
+            src: ['library.js']
+          }
+        ]
+      },
+      removeVersionTags: {
+        options: {
+          endpoint: 'git://github.com/someone/some-package-bower-removeversiontags.git',
+          stageDir: '../tmp/staging-removeVersionTags',
+          removeVersionTags: true
+        },
+        files: [
+          {
+            expand: true,
+            cwd: 'build/',
+            src: ['library.js']
+          }
+        ]
+      },
+      suffixTagWithTimestamp: {
+        options: {
+          endpoint: 'git://github.com/someone/some-package-bower-suffixtagwithtimestamp.git',
+          stageDir: '../tmp/staging-suffixTagWithTimestamp',
+          suffixTagWithTimestamp: true
+        },
+        files: [
+          {
+            expand: true,
+            cwd: 'build/',
+            src: ['library.js']
+          }
+        ]
       }
     },
 
     // Unit tests.
     nodeunit: {
-      tests: ['test/*_test.js']
+      tests: ['test/*_test.js', 'test/unit/**/*-test.js']
     }
   });
 

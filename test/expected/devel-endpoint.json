@@ -1,7 +1,7 @@
 {
   "called": {
     "setUp": {
-      "times": 2,
+      "times": 1,
       "with": {
         "0": {
           "nameArgs": "bowerRelease:devel",
@@ -200,14 +200,14 @@
       }
     },
     "clone": {
-      "times": 2,
+      "times": 1,
       "with": {
         "0": "git://github.com/someone/some-package-bower-devel.git",
         "2": "."
       }
     },
     "add": {
-      "times": 2,
+      "times": 1,
       "with": {
         "0": [
           "%%PROJECT_ROOT%%/test/tmp/staging-devel/jquery.js",
@@ -226,26 +226,26 @@
       }
     },
     "commit": {
-      "times": 2,
+      "times": 1,
       "with": {
         "0": "Bumped version to 1.0.0"
       }
     },
     "tag": {
-      "times": 2,
+      "times": 1,
       "with": {
         "0": "1.0.0",
         "1": "library.js@1.0.0"
       }
     },
     "push": {
-      "times": 2,
+      "times": 1,
       "with": {
         "1": "1.0.0"
       }
     },
     "tearDown": {
-      "times": 2,
+      "times": 1,
       "with": {}
     }
   }

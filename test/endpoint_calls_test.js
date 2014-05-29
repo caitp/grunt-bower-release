@@ -57,5 +57,28 @@ exports.bowerRelease = {
     var expected = processJSON(fs.readFileSync('test/expected/devel-endpoint.json', 'utf8'));
     test.deepEqual(actual, expected, 'should call all vcs methods with correct arguments');
     test.done();
+  },
+  overwriteTag: function(test) {
+    test.expect(1);
+    var actual = processJSON(fs.readFileSync('test/tmp/overwriteTag-endpoint.json', 'utf8'));
+    var expected = processJSON(fs.readFileSync('test/expected/overwriteTag-endpoint.json', 'utf8'));
+    test.deepEqual(actual, expected, 'should call all vcs methods with correct arguments');
+    test.done();
+  },
+  removeVersionTags: function(test) {
+    test.expect(1);
+    var actual = processJSON(fs.readFileSync('test/tmp/removeVersionTags-endpoint.json', 'utf8'));
+    var expected = processJSON(fs.readFileSync('test/expected/removeVersionTags-endpoint.json', 'utf8'));
+    test.deepEqual(actual, expected, 'should call all vcs methods with correct arguments');
+    test.done();
+  },
+  suffixTagWithTimestamp: function(test) {
+    test.expect(2);
+    var actual = processJSON(fs.readFileSync('test/tmp/suffixTagWithTimestamp-endpoint.json', 'utf8'));
+    test.equal(actual.called.tag.times, 1);
+    var hasSuffixPattern = /^1\.0\.0\+[0-9]+$/;
+    test.ok(hasSuffixPattern.test(actual.called.tag.with['0']),
+        'should suffix a tag with a timestamp prefix, but the tag was [' + actual.called.tag.with['0'] + ']');
+    test.done();
   }
 };

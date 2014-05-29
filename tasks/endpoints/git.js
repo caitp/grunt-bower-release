@@ -22,14 +22,14 @@
  * THE SOFTWARE.
  */
 
-module.exports = function(grunt) {
+function Git(grunt, async) {
   /* Verbosity */
   var streams = [undefined, undefined, undefined]
   if(grunt.option('verbose')) {
     streams[1] = process.stdout
     streams[2] = process.stderr
   }
-  return {
+  var gitEndpoint = {
     /* Ensure that the VCS is installed on the system, and therefore usable. */
     setUp: function(parentArg, done) {
       grunt.util.spawn({
@@ -104,6 +104,47 @@ module.exports = function(grunt) {
       }, done)
     },
 
+    removeVersionTags: function(tags, done) {
+      grunt.verbose.writeln('remove version tags: ' + tags);
+      async.eachSeries(tags, gitEndpoint.removeLocalTag, done);
+    },
+
+    getVersionTags: function(version, done) {
+      grunt.verbose.writeln('git tag');
+
+      grunt.util.spawn({
+        cmd: 'git',
+        args: ['tag']
+      }, function(error, result) {
+        var tags = result.stdout.split(/\n/);
+        done(tags.filter(function(tag) {
+          return tag.indexOf(version) === 0;
+        }));
+      });
+    },
+
+    removeLocalTag: function(tag, done) {
+      var args = ['tag', '-d', tag];
+      grunt.verbose.writeln('git ' + args.join(' '));
+      grunt.util.spawn({
+        cmd: 'git',
+        args: args,
+        opts: { stdio: streams }
+      }, function () {
+        gitEndpoint.removeRemoteTag(tag, done);
+      });
+    },
+
+    removeRemoteTag: function(tag, done) {
+      var args = ['push', 'origin', ':refs/tags/' + tag];
+      grunt.verbose.writeln('git ' + args.join(' '));
+      grunt.util.spawn({
+        cmd: 'git',
+        args: args,
+        opts: { stdio: streams }
+      }, done);
+    },
+
     /* 'Tag' the release */
     tag: function(tagname, msg, done) {
       var args = ['tag', tagname]
@@ -136,6 +177,11 @@ module.exports = function(grunt) {
         opts: { stdio: streams }
       }, done)
     }
-  }
+  };
+
+  return gitEndpoint;
 }
 
+Git.$inject = ['grunt', 'async'];
+
+module.exports = Git;

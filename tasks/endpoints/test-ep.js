@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2013 Caitlin Potter and Contributors 
+ * Copyright (c) 2013 Caitlin Potter and Contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,73 +22,92 @@
  * THE SOFTWARE.
  */
 
-module.exports = function(grunt) {
+function Test(grunt) {
   /* Verbosity */
   var streams = [undefined, undefined, undefined],
     parent = {},
     fs = require('fs.extra');
-  if(grunt.option('verbose')) {
+  if (grunt.option('verbose')) {
     streams[1] = process.stdout
     streams[2] = process.stderr
   }
 
   var endPoint = {
     /* Ensure that the VCS is installed on the system, and therefore usable. */
-    setUp: function(parentArg, done) {
+    setUp: function (parentArg, done) {
       parent = parentArg;
-      endPoint.called.call('setUp', arguments);
+      endPoint.called = {};
+      endPoint.call('setUp', arguments);
       done()
     },
 
     tearDown: function (done) {
-      endPoint.called.call('tearDown', arguments);
+      endPoint.call('tearDown', arguments);
 
-      grunt.file.write('../tmp/'+parent.target+'-endpoint.json',
-          JSON.stringify(endPoint, null, 2))
+      grunt.file.write('../tmp/' + parent.target + '-endpoint.json',
+        JSON.stringify(endPoint, null, 2))
       done()
     },
 
     /* Clone the repository at 'endpoint' into the current directory */
-    clone: function(endpoint, branch, dir, done) {
-      endPoint.called.call('clone', arguments);
+    clone: function (endpoint, branch, dir, done) {
+      endPoint.call('clone', arguments);
       done();
     },
 
     /* Add the array of files into the repository, relative to the CWD */
-    add: function(files, done) {
-      endPoint.called.call('add', arguments);
+    add: function (files, done) {
+      endPoint.call('add', arguments);
       done();
     },
 
     /* Commit the current changes to a changeset, with the specified message. */
-    commit: function(message, done) {
-      endPoint.called.call('commit', arguments);
+    commit: function (message, done) {
+      endPoint.call('commit', arguments);
       done()
     },
 
+    getVersionTags: function (version, done) {
+      endPoint.call('getVersionTags', arguments);
+      done();
+    },
+
+    removeVersionTags: function (tags, done) {
+      endPoint.call('removeVersionTags', arguments);
+      done();
+    },
+
+    removeLocalTag: function (tag, done) {
+      endPoint.call('removeLocalTag', arguments);
+      done();
+    },
+
+    removeRemoteTag: function (tag, done) {
+      endPoint.call('removeRemoteTag', arguments);
+      done();
+    },
+
     /* 'Tag' the release */
-    tag: function(tagname, msg, done) {
-      endPoint.called.call('tag', arguments);
+    tag: function (tagname, msg, done) {
+      endPoint.call('tag', arguments);
       done()
     },
 
     /* Push the changesets to the server */
-    push: function(branch, tag, done) {
-      endPoint.called.call('push', arguments);
+    push: function (branch, tag, done) {
+      endPoint.call('push', arguments);
       done()
     },
-    called: {
-      call: function(method, args) {
-        if(typeof endPoint.called[method] === 'undefined'){
-          endPoint.called[method] = {
-            times: 1,
-            with: args
-          }
-        } else {
-          endPoint.called[method].times++;
-          endPoint.called[method].with = args;
+    called: {},
+    call: function (method, args) {
+      if (typeof endPoint.called[method] === 'undefined') {
+        endPoint.called[method] = {
+          times: 1,
+          with: args
         }
-
+      } else {
+        endPoint.called[method].times++;
+        endPoint.called[method].with = args;
       }
     }
   }
@@ -96,3 +115,6 @@ module.exports = function(grunt) {
   return endPoint;
 }
 
+Test.$inject = ['grunt'];
+
+module.exports = Test;

@@ -1,0 +1,102 @@
+{
+  "called": {
+    "setUp": {
+      "times": 1,
+      "with": {
+        "0": {
+          "nameArgs": "bowerRelease:overwriteTag",
+          "name": "bowerRelease",
+          "args": [],
+          "flags": {},
+          "errorCount": 0,
+          "target": "overwriteTag",
+          "data": {
+            "options": {
+              "endpoint": "git://github.com/someone/some-package-bower-overwritetag.git",
+              "stageDir": "../tmp/staging-overwritetag",
+              "overwriteTag": true
+            },
+            "files": [
+              {
+                "expand": true,
+                "cwd": "build/",
+                "src": [
+                  "library.js"
+                ]
+              }
+            ]
+          },
+          "files": [
+            {
+              "src": [
+                "build/library.js"
+              ],
+              "orig": {
+                "expand": true,
+                "cwd": "build/",
+                "src": [
+                  "library.js"
+                ]
+              },
+              "dest": "library.js"
+            }
+          ],
+          "filesSrc": [
+            "build/library.js"
+          ]
+        }
+      }
+    },
+    "clone": {
+      "times": 1,
+      "with": {
+        "0": "git://github.com/someone/some-package-bower-overwritetag.git",
+        "2": "."
+      }
+    },
+    "add": {
+      "times": 1,
+      "with": {
+        "0": [
+          "%%PROJECT_ROOT%%/test/tmp/staging-overwritetag/library.js",
+          "bower.json"
+        ]
+      }
+    },
+    "commit": {
+      "times": 1,
+      "with": {
+        "0": "Bumped version to 1.0.0"
+      }
+    },
+    "removeLocalTag": {
+      "times": 1,
+      "with": {
+        "0": "1.0.0"
+      }
+    },
+    "removeRemoteTag": {
+      "times": 1,
+      "with": {
+        "0": "1.0.0"
+      }
+    },
+    "tag": {
+      "times": 1,
+      "with": {
+        "0": "1.0.0",
+        "1": "undefined@1.0.0"
+      }
+    },
+    "push": {
+      "times": 1,
+      "with": {
+        "1": "1.0.0"
+      }
+    },
+    "tearDown": {
+      "times": 1,
+      "with": {}
+    }
+  }
+}
