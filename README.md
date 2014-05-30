@@ -79,14 +79,25 @@ It's super simple stuff, and I hope some people might find it useful!
 3. `stageDir` -- A staging directory where the repository is built and tagged.
 4. `main` -- Enables the grunt task to override `bower.json`'s `main` parameter. This will be ignored if it is not a string or an array.
 5. `dependencies` -- Enables the grunt task to add dependencies to a build.
-6. `extendDependencies` -- If true, the depencies from the source repository will be extended with the grunt options dependencies.
+6. `extendDependencies` -- If true, the dependencies from the source repository will be extended with the grunt options dependencies.
 7. `branchName` -- (Optional) Specify the branch used for the endpoint.
+8. ```overwriteTag``` -- (Optional) If true, a Git tag will be overwritten. The plug-in creates a Git tag in order to specify a package version for ```Bower```.
+A tag name is derived from the ```version``` attribute in ```bower.json```. If you have already released a certain version of a package and attempt to do overwrite that version,
+the plug-in will fail, because it won't be able to push the same tag twice. The option ensures that a tag is deleted, before it gets pushed again.
+9. ```removeVersionTags``` -- (Optional) If true, all Git tags whose name starts with a value of ```version``` in ```bower.json``` will be removed.
+10. ```suffixTagWithTimestamp``` -- (Optional) If true, a Git tag will be suffixed with ```+[CURRENT_TIMESTAMP]```, e.g. ```1.0.0-SNAPSHOT+849829134829```
 
 ## Files
 
 Files must currently be specified per-task, which is unfortunate and will hopefully be fixed soon.
 
 They may be specified as per the guidelines in [Configuring files](http://gruntjs.com/configuring-tasks#files)
+
+## Releasing Snapshot Version
+
+In some development environments developers prefer to have a snapshot version, which indicates a work in progress. The plug-in allows releasing snapshot versions.
+All you have to do is to set ```removeVersionTags``` and ```suffixTagWithTimestamp``` to ```true```.
+Those options will ensure that typing ```bower update``` will fetch a new version of a snapshot dependency without having to change ```bower.json``` or clean bower cache.
 
 ##License
 
