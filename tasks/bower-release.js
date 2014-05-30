@@ -1,7 +1,7 @@
 /**
  * The MIT License (MIT)
  *
- * Copyright (c) 2013 Caitlin Potter and Contributors 
+ * Copyright (c) 2013 Caitlin Potter and Contributors
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -88,7 +88,7 @@ module.exports = function(grunt) {
       return finish(new Error('Missing \'bower.json\' or \'component.json\''))
     }
 
-    /* 
+    /*
      * TODO: Convert any such comments into jsdoc/yuidoc format, so that they can easily be transformed into markup.
      *
      * Supported properties:
