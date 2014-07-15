@@ -77,7 +77,9 @@ function Git(grunt, async) {
 
     /* Add the array of files into the repository, relative to the CWD */
     add: function(files, done) {
-      grunt.util.async.forEach(files, function(file, done) {
+      async.eachSeries(files, function(file, done) {
+        //Double check for avoiding failing on undefined files in array
+        if (!file) return done()
         var args = ['add', file]
         grunt.verbose.writeln('git ' + args.join(' '))
         grunt.util.spawn({
@@ -85,12 +87,7 @@ function Git(grunt, async) {
           args: args,
           opts: { stdio: streams }
         }, done)
-      }, function(err, result, code) {
-        // Hopefully enough time...
-        setTimeout(function() {
-          done(err, result, code);
-        }, 500);
-      });
+      }, done);
     },
 
     /* Commit the current changes to a changeset, with the specified message. */
